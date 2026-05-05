@@ -65,7 +65,7 @@ fastboot flash recovery recovery.img
 
 #### Working
 - [X] Flashing ROMs (AOSP and OOS)
-- [X] ADB (+ sideload) - pre-decrypt and post-decrypt
+- [X] ADB - pre-decrypt and post-decrypt
 - [X] all important partitions listed in mount/backup lists
 - [X] MTP export
 - [X] decrypt /data - OOS10, OOS11, and custom A10+A11 ROMs with FBEv1
