@@ -73,7 +73,7 @@ fastboot flash recovery recovery.img
 - [X] Restore from internal/microSD (with decryption)
 - [X] F2FS/EXT4 Support, exFAT/NTFS where supported
 - [X] backup/restore to/from external (USB-OTG) storage
-- [X] update.zip sideload
+- [X] Sideload (ROM, Magisk, Kernel via ADB)
 - [X] backup/restore to/from adb
 
 ##### Credits
