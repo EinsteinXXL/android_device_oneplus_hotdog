@@ -81,7 +81,6 @@ fastboot flash recovery recovery.img
 - mauronofrio for original trees
 - Systemad for OOS decryption fixes
 - TWRP Team
-- EinsteinXXL for fork maintenance and USB gadget/encrypted backup fixes
 ## Applied Patches & Commits
 
 ### EinsteinXXL Custom Patches (Base)
