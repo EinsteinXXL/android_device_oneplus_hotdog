@@ -50,7 +50,7 @@ To build, execute these commands in order
 . build/envsetup.sh
 export ALLOW_MISSING_DEPENDENCIES=true
 export LC_ALL=C
-lunch twrp_hotdog-eng && make clean && make recoveryimage -j$(nproc --all)
+lunch twrp_hotdog-eng && make clean && mka adbd recoveryimage
 ```
 
 To test it:
