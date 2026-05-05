@@ -4,19 +4,17 @@ These are personal test builds of mine. In no way do I hold responsibility if it
 Proceed at your own risk.
 
 ### Note
-2021-04-27:
-Initial build which boots on OOS11 for 7T / Pro.
-Decryption on OOS11 does not work. Might work on custom that uses OOS11 blobs.
+Decryption is working for custom ROMs with OOS blobs, both for ROMs with sdcardfs and FBEv1 encryption.
 
 ## Setup repo tool
 Setup repo tool from here https://source.android.com/setup/develop#installing-repo
 
 ## Compile
 
-Sync aosp_r29 manifest:
+Sync TWRP manifest (twrp-11 minimal):
 
 ```
-repo init -u https://android.googlesource.com/platform/manifest -b android-11.0.0_r29
+repo init -u git://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-11
 ```
 
 Make a directory named local_manifest under .repo, and create a new manifest file, for example hotdog.xml
@@ -29,12 +27,16 @@ and then paste the following
 	fetch="https://github.com/" />
 
 <project path="device/oneplus/hotdog"
-	name="systemad/android_device_oneplus_hotdog"
+	name="EinsteinXXL/android_device_oneplus_hotdog"
 	remote="github"
-	revision="android-11" />
+	revision="main" />
+
+<project path="bootable/recovery"
+	name="EinsteinXXL/android_bootable_recovery"
+	remote="github"
+	revision="einsteinxxl-twrp-fixes" />
 </manifest>
 ```
-Use https://del.dog/a11-twrp-extras.txt is same directory as well. You might need to pick few patches from gerrit.twrp.me to get some stuff working.
 
 Sync the sources with
 
@@ -48,8 +50,7 @@ To build, execute these commands in order
 . build/envsetup.sh
 export ALLOW_MISSING_DEPENDENCIES=true
 export LC_ALL=C
-lunch twrp_hotdog-eng
-mka adbd recoveryimage
+lunch twrp_hotdog-eng && make clean && make recoveryimage -j$(nproc --all)
 ```
 
 To test it:
@@ -58,27 +59,26 @@ To test it:
 # To temporarily boot it
 fastboot boot out/target/product/hotdog/recovery.img 
 
-# Since 7T / Pro has a dedicated recovery partition, you can flash the recovery with
+# Since 7T Pro has a dedicated recovery partition, you can flash the recovery with
 fastboot flash recovery recovery.img
 ```
 
 #### Working
 - [X] Flashing ROMs (AOSP and OOS)
-- [X] ADB (+ sideload)
+- [X] ADB (+ sideload) - pre-decrypt and post-decrypt
 - [X] all important partitions listed in mount/backup lists
 - [X] MTP export
-- [X] decrypt /data - Only working for Custom A10 and A11 ROMs using OOS10 blobs
-- [X] Backup to internal/microSD - Not working
-- [X] Restore from internal/microSD - Not working
+- [X] decrypt /data - OOS10, OOS11, and custom A10+A11 ROMs with FBEv1
+- [X] Backup to internal/microSD (with encryption)
+- [X] Restore from internal/microSD (with decryption)
 - [X] F2FS/EXT4 Support, exFAT/NTFS where supported
 - [X] backup/restore to/from external (USB-OTG) storage
 - [X] update.zip sideload
-- [X] backup/restore to/from adb (https://gerrit.omnirom.org/#/c/15943/)
-
-#### Not working - OxygenOS specific
-- Decryption and probably everything that requires it
+- [X] backup/restore to/from adb
 
 ##### Credits
-- CaptainThrowback for original trees.
-- mauronofrio for original trees.
-- TWRP team and everyone involved for their amazing work.
+- CaptainThrowback for original trees
+- mauronofrio for original trees
+- Systemad for OOS decryption fixes
+- TWRP Team
+- EinsteinXXL for fork maintenance and USB gadget/encrypted backup fixes
