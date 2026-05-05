@@ -69,3 +69,12 @@ on fs
     # Set fscklog permission
     chown root system /dev/fscklogs/log
     chmod 0770 /dev/fscklogs/log
+
+# After FBE decrypt, qseecomd/keymaster shutdown briefly resets the SM8150
+# USB controller (TrustZone/USB integration). Restart adbd after decrypt is
+# fully done (twrp.decrypt.done=true is set at end of Post_Decrypt()) to
+# re-establish the ADB connection.
+on property:twrp.decrypt.done=true
+    stop adbd
+    write /config/usb_gadget/g1/UDC ""
+    start adbd
