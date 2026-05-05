@@ -82,35 +82,6 @@ fastboot flash recovery recovery.img
 - Systemad for OOS decryption fixes
 - TWRP Team
 - EinsteinXXL for fork maintenance and USB gadget/encrypted backup fixes
-
----
-
-## Applied Patches & Commits
-
-### EinsteinXXL Custom Patches (Base)
-- **ad9604c** — Encrypted backup/restore fixes from OrangeFox fox_11.0
-- **a2b9fe1** — Remaining backup/restore issues from code review
-- **a7c73e3** — Resource leak & error handling fixes (14 bugs in createTar/openTar/closeTar)
-
-### Gerrit Cherry-picks from android-12.1
-| Commit | Original | Content |
-|--------|----------|---------|
-| 0f3298cc | 78914ca6 | sepolicy: fix avc denials for loop mount |
-| 64f71764 | 0552fad6 | f2fs: fix repair |
-| 17061196 | e4b807b9 | Is_Mounted: fix symlink detection |
-| 77209cc7 | dbed985d | selinux context for backups/logs in /data/recovery |
-| a64cfde6 | b2a1f930 | fscrypt ENOKEY: ignore error and continue |
-
-### Gerrit Cherry-picks from android-13
-| Commit | Original | Content |
-|--------|----------|---------|
-| 39a128d3 | b6867185 | Exclude /data/gsi directory from userdata backup (prevents huge DSU images) |
-| 7c0739c0 | a8f9817b | Exclude package-restrictions.xml (fixes boot issues after restore) |
-| 9c802e12 | 5ec04efc | Don't treat non-existing logical partitions as errors |
-
-
----
-
 ## Applied Patches & Commits
 
 ### EinsteinXXL Custom Patches (Base)
